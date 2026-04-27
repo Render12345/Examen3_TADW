@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Calificaciones from "./pages/Calificaciones";
 import Kardex from "./pages/Kardex";
 import Login from "./pages/Login";
-import { ProtectedRoute } from "./components/Protectedroute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 import "./App.css";
 
