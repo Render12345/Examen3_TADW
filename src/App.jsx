@@ -15,11 +15,11 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
 
-          {/* <Route element={<ProtectedRoute />}> */}
-          <Route path="/" element={<Home />} />
-          <Route path="/calificaciones" element={<Calificaciones />} />
-          <Route path="/kardex" element={<Kardex />} />
-          {/* </Route> */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/calificaciones" element={<Calificaciones />} />
+            <Route path="/kardex" element={<Kardex />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,4 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+
 function Navbar(params) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   const items = [
     { name: "Mi información", route: "/" },
     { name: "Calificaciones", route: "/calificaciones" },
@@ -59,6 +70,11 @@ function Navbar(params) {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <button onClick={handleLogout} className="text-red-500 hover:bg-red-50 text-lg">
+                    Cerrar sesión
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -133,6 +149,11 @@ function Navbar(params) {
               </a>
             </li>
           ))}
+          <li className="mt-auto">
+            <button onClick={handleLogout} className="text-red-500 hover:bg-red-50 text-lg font-bold">
+              Cerrar sesión
+            </button>
+          </li>
         </ul>
       </div>
     </div>
