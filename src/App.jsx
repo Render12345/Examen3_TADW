@@ -1,23 +1,27 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Calificaciones from "./pages/Calificaciones";
+import Kardex from "./pages/Kardex";
+import Login from "./pages/Login";
+import { ProtectedRoute } from "./components/Protectedroute";
+
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div className="p-4">
-        <button className="btn btn-primary">Primary Button</button>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title">Hello React!</h2>
-            <p>This is a card using daisyUI classes.</p>
-          </div>
-        </div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+
+          {/* <Route element={<ProtectedRoute />}> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/calificaciones" element={<Calificaciones />} />
+          <Route path="/kardex" element={<Kardex />} />
+          {/* </Route> */}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
