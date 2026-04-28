@@ -171,99 +171,101 @@ function Horario(params) {
           <div className="mx-auto px-6 lg:px-8">
             <div className="mt-2 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
               <div className="relative lg:row-span-2">
-                <div className="absolute inset-px rounded-lg bg-gray-800 lg:rounded-l-4xl" />
-                <div className="relative flex h-full flex-col justify-around overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                <div className="absolute inset-px rounded-lg bg-neutral lg:rounded-l-4xl" />
+                <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                   <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                    <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">
+                    <p className="mt-2 text-lg font-medium tracking-tight text-neutral-content max-lg:text-center">
                       Horario por dia
                     </p>
                   </div>
                   {/* map de horario por dia */}
-                  {horarioPorDia.map((item) => (
-                    <div
-                      key={item.diaKey}
-                      className="bg-base-100 border-base-300 collapse my-4 collapse-arrow border"
-                    >
-                      <input type="checkbox" className="peer" />
+                  <div className="mx-4 overflow-y-auto py-16 my-4">
+                    {horarioPorDia.map((item) => (
+                      <div
+                        key={item.diaKey}
+                        className="bg-base-100 border-base-300 collapse my-4  collapse-arrow border"
+                      >
+                        <input type="checkbox" className="peer" />
 
-                      <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content font-bold">
-                        {item.diaNombre}
-                        {/* Badge opcional para ver cuántas clases hay ese día */}
-                        <span className="badge badge-ghost ml-2">
-                          {item.clases.length}
-                        </span>
-                      </div>
+                        <div className="collapse-title bg-success text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content font-bold">
+                          {item.diaNombre}
+                          {/* Badge opcional para ver cuántas clases hay ese día */}
+                          <span className="badge badge-ghost ml-2">
+                            {item.clases.length}
+                          </span>
+                        </div>
 
-                      <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                        <div className="overflow-x-auto">
-                          <table className="table w-full">
-                            <thead>
-                              <tr className="text-secondary-content/70">
-                                <th>Materia</th>
-                                <th>Hora</th>
-                                <th>Salón</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {item.clases.length > 0 ? (
-                                item.clases.map((clase) => (
-                                  <tr
-                                    key={`${clase.id}-${item.diaKey}`}
-                                    className="hover:bg-black/10"
-                                  >
-                                    <td className="font-medium">
-                                      {clase.nombre}
-                                    </td>
-                                    <td>{clase.hora}</td>
-                                    <td>
-                                      <span className="badge badge-outline">
-                                        {clase.salon}
-                                      </span>
+                        <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                          <div className="overflow-x-auto">
+                            <table className="table w-full">
+                              <thead>
+                                <tr className="text-secondary-content/70">
+                                  <th>Materia</th>
+                                  <th>Hora</th>
+                                  <th>Salón</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {item.clases.length > 0 ? (
+                                  item.clases.map((clase) => (
+                                    <tr
+                                      key={`${clase.id}-${item.diaKey}`}
+                                      className="hover:bg-black/10"
+                                    >
+                                      <td className="font-medium">
+                                        {clase.nombre}
+                                      </td>
+                                      <td>{clase.hora}</td>
+                                      <td>
+                                        <span className="badge badge-outline">
+                                          {clase.salon}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  ))
+                                ) : (
+                                  <tr>
+                                    <td
+                                      colSpan="3"
+                                      className="text-center italic opacity-70"
+                                    >
+                                      No tienes clases programadas
                                     </td>
                                   </tr>
-                                ))
-                              ) : (
-                                <tr>
-                                  <td
-                                    colSpan="3"
-                                    className="text-center italic opacity-70"
-                                  >
-                                    No tienes clases programadas
-                                  </td>
-                                </tr>
-                              )}
-                            </tbody>
-                          </table>
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
                 <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 lg:rounded-l-4xl" />
               </div>
 
               <div className="relative max-lg:row-start-1 min-w-0">
-                <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-t-4xl" />
+                <div className="absolute inset-px rounded-lg bg-neutral max-lg:rounded-t-4xl" />
                 <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] w-full">
                   <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                    <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">
+                    <p className="mt-2 text-lg font-medium tracking-tight text-neutral-content max-lg:text-center">
                       Proximas clases:
                     </p>
-                    <p className="mt-2 max-w-lg text-primary max-lg:text-center font-bold p-2">
+                    <p className="mt-2 max-w-lg text-neutral-content max-lg:text-center font-bold p-2">
                       {proximasClases[0].nombre} {proximasClases[0].diaNombre} a
                       las {proximasClases[0].horaCompleta} en{" "}
                       {proximasClases[0].salon}
                     </p>
                   </div>
-                  <div className="overflow-x-auto w-full max-w-full bg-base-100 p-4 m-4 rounded-lg shadow border border-base-300">
-                    <table className="table text-center w-full min-w-[500px]">
+                  <div className="overflow-x-auto w-full max-w-full bg-base-100 p-4 mt-4 rounded-lg shadow border border-base-300">
+                    <table className="table text-center w-full min-w-[600px]">
                       <thead>
                         <tr className="bg-base-200">
-                          <th className="text-left">Detalle</th>
-                          <th>1</th>
-                          <th>2</th>
-                          <th>3</th>
-                          <th>4</th>
+                          <th className="text-left w-1/5">Detalle</th>
+                          <th className="w-1/5">1</th>
+                          <th className="w-1/5">2</th>
+                          <th className="w-1/5">3</th>
+                          <th className="w-1/5">4</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -272,9 +274,14 @@ function Horario(params) {
                           {siguientes4Materias.map((clase, index) => (
                             <td
                               key={`materia-${index}`}
-                              className="font-medium"
+                              className="font-medium text-xs sm:text-sm min-w-30"
                             >
-                              {clase.nombre}
+                              <div
+                                className="line-clamp-2"
+                                title={clase.nombre}
+                              >
+                                {clase.nombre}
+                              </div>
                             </td>
                           ))}
                         </tr>
@@ -311,39 +318,49 @@ function Horario(params) {
               </div>
 
               <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
-                <div className="absolute inset-px rounded-lg bg-gray-800" />
-                <div className="relative flex h-full flex-col justify-around overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+                <div className="absolute inset-px rounded-lg bg-neutral" />
+                <div className="relative flex h-full flex-col justify-center gap-6 overflow-hidden rounded-[calc(var(--radius-lg)+1px)] py-8">
                   <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                    <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">
+                    <p className="mt-2 text-lg font-medium tracking-tight text-neutral-content max-lg:text-center">
                       Stats:
                     </p>
                   </div>
                   {/* Reemplaza tu sección de Stats con esto */}
                   <div className="stats stats-vertical lg:stats-horizontal shadow">
                     <div className="stat">
-                      <div className="stat-title">Promedio Diario</div>
-                      <div className="stat-value text-primary">
+                      <div className="stat-title text-neutral-content">
+                        Promedio Diario
+                      </div>
+                      <div className="stat-value text-neutral-content">
                         {promedioDiario} hrs
                       </div>
-                      <div className="stat-desc">
+                      <div className="stat-desc text-neutral-content">
                         Basado en semana de 5 días
                       </div>
                     </div>
 
                     <div className="stat">
-                      <div className="stat-title">Cantidad de materias</div>
-                      <div className="stat-value text-secondary">
+                      <div className="stat-title text-neutral-content">
+                        Cantidad de materias
+                      </div>
+                      <div className="stat-value text-neutral-content">
                         {materias.length}
                       </div>
-                      <div className="stat-desc">
+                      <div className="stat-desc text-neutral-content">
                         {materias.length} materias programadas
                       </div>
                     </div>
 
                     <div className="stat">
-                      <div className="stat-title">Total Semanal</div>
-                      <div className="stat-value">{totalHorasSemana} hrs</div>
-                      <div className="stat-desc">Horas de clase</div>
+                      <div className="stat-title text-neutral-content">
+                        Total Semanal
+                      </div>
+                      <div className="stat-value text-neutral-content">
+                        {totalHorasSemana} hrs
+                      </div>
+                      <div className="stat-desc text-neutral-content">
+                        Horas de clase
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -351,79 +368,93 @@ function Horario(params) {
               </div>
 
               <div className="relative lg:row-span-2">
-                <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-b-4xl lg:rounded-r-4xl" />
-                <div className="relative flex h-full flex-col justify-around overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                <div className="absolute inset-px rounded-lg bg-neutral max-lg:rounded-b-4xl lg:rounded-r-4xl" />
+                <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
                   <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                    <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">
+                    <p className="mt-2 text-lg font-medium tracking-tight text-neutral-content max-lg:text-center">
                       Horario por materia
                     </p>
                   </div>
-                  {/* lista de materias */}
-                  {materias.map((materia) => (
-                    <div className="bg-base-100 border-base-300 collapse my-4 collapse-arrow border">
-                      <input type="checkbox" className="peer" />
-                      <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                        {/* {JSON.stringify(materias)} */}
-                        {materia.nombre_materia}
-                      </div>
-                      <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                        <div className="overflow-x-auto">
-                          <table className="table">
-                            {/* head */}
-                            <thead>
-                              <tr>
-                                <th>Lunes</th>
-                                <th>Martes</th>
-                                <th>Miercoles</th>
-                                <th>Jueves</th>
-                                <th>Viernes</th>
-                                <th>Sabado</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                {/* Lunes */}
-                                <td>
-                                  {materia.lunes &&
-                                    `${materia.lunes} en: ${materia.lunes_clave_salon}`}
-                                </td>
+                  <div className="mx-4 overflow-y-auto py-16 my-4">
+                    {/* lista de materias */}
+                    {materias.map((materia) => (
+                      <div className="bg-base-100 border-base-300 collapse my-4 collapse-arrow border">
+                        <input type="checkbox" className="peer" />
+                        <div className="collapse-title bg-success text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content font-bold">
+                          {/* {JSON.stringify(materias)} */}
+                          {materia.nombre_materia}
+                        </div>
+                        <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                          <div className="overflow-x-auto">
+                            <table className="table">
+                              {/* head */}
+                              <thead>
+                                <tr>
+                                  <th className="text-secondary-content">
+                                    Lunes
+                                  </th>
+                                  <th className="text-secondary-content">
+                                    Martes
+                                  </th>
+                                  <th className="text-secondary-content">
+                                    Miercoles
+                                  </th>
+                                  <th className="text-secondary-content">
+                                    Jueves
+                                  </th>
+                                  <th className="text-secondary-content">
+                                    Viernes
+                                  </th>
+                                  <th className="text-secondary-content">
+                                    Sabado
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  {/* Lunes */}
+                                  <td>
+                                    {materia.lunes &&
+                                      `${materia.lunes} en: ${materia.lunes_clave_salon}`}
+                                  </td>
 
-                                {/* Martes */}
-                                <td>
-                                  {materia.martes &&
-                                    `${materia.martes} en: ${materia.martes_clave_salon}`}
-                                </td>
+                                  {/* Martes */}
+                                  <td>
+                                    {materia.martes &&
+                                      `${materia.martes} en: ${materia.martes_clave_salon}`}
+                                  </td>
 
-                                {/* Miercoles */}
-                                <td>
-                                  {materia.miercoles &&
-                                    `${materia.miercoles} en: ${materia.miercoles_clave_salon}`}
-                                </td>
+                                  {/* Miercoles */}
+                                  <td>
+                                    {materia.miercoles &&
+                                      `${materia.miercoles} en: ${materia.miercoles_clave_salon}`}
+                                  </td>
 
-                                {/* Jueves */}
-                                <td>
-                                  {materia.jueves &&
-                                    `${materia.jueves} en: ${materia.jueves_clave_salon}`}
-                                </td>
+                                  {/* Jueves */}
+                                  <td>
+                                    {materia.jueves &&
+                                      `${materia.jueves} en: ${materia.jueves_clave_salon}`}
+                                  </td>
 
-                                {/* Viernes */}
-                                <td>
-                                  {materia.viernes &&
-                                    `${materia.viernes} en: ${materia.viernes_clave_salon}`}
-                                </td>
+                                  {/* Viernes */}
+                                  <td>
+                                    {materia.viernes &&
+                                      `${materia.viernes} en: ${materia.viernes_clave_salon}`}
+                                  </td>
 
-                                {/* Sabado */}
-                                <td>
-                                  {materia.sabado &&
-                                    `${materia.sabado} en: ${materia.sabado_clave_salon}`}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                  {/* Sabado */}
+                                  <td>
+                                    {materia.sabado &&
+                                      `${materia.sabado} en: ${materia.sabado_clave_salon}`}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
                 <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 max-lg:rounded-b-4xl lg:rounded-r-4xl" />
               </div>
