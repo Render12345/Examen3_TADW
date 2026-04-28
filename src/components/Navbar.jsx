@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function Navbar(params) {
   const { logout } = useAuth();
@@ -7,13 +7,14 @@ function Navbar(params) {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const items = [
     { name: "Mi información", route: "/" },
     { name: "Calificaciones", route: "/calificaciones" },
-    { name: "kardex", route: "/kardex" },
+    { name: "Kardex", route: "/kardex" },
+    { name: "Horario", route: "/horario" },
   ];
 
   return (
@@ -24,7 +25,7 @@ function Navbar(params) {
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-100 shadow-sm w-full">
           {/* START: Menú hamburguesa (Móvil) + Título (Desktop) */}
-          <div className="navbar-center">
+          <div className="navbar-start">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-2"
@@ -53,9 +54,7 @@ function Navbar(params) {
           {/* CENTER: Título (Móvil) + Menú horizontal (Desktop) */}
           <div className="navbar-end">
             {/* Título en Móvil (oculto en desktop) */}
-            <a className="btn btn-ghost text-2xl lg:hidden">
-              Lince-emprendedor
-            </a>
+            <a className="btn btn-ghost text-2xl lg:hidden">Nuevo SII</a>
 
             {/* Menú en Desktop (oculto en móvil) */}
             <div className="hidden flex-none lg:block">
@@ -71,7 +70,10 @@ function Navbar(params) {
                   </li>
                 ))}
                 <li>
-                  <button onClick={handleLogout} className="text-red-500 hover:bg-red-50 text-lg">
+                  <button
+                    onClick={handleLogout}
+                    className="text-red-500 hover:bg-red-50 text-lg"
+                  >
                     Cerrar sesión
                   </button>
                 </li>
@@ -172,7 +174,10 @@ function Navbar(params) {
             </li>
           ))}
           <li className="mt-auto">
-            <button onClick={handleLogout} className="text-red-500 hover:bg-red-50 text-lg font-bold">
+            <button
+              onClick={handleLogout}
+              className="text-red-500 hover:bg-red-50 text-lg font-bold"
+            >
               Cerrar sesión
             </button>
           </li>

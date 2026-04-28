@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Calificaciones from "./pages/Calificaciones";
 import Kardex from "./pages/Kardex";
+import Horario from "./pages/Horario";
 import Login from "./pages/Login";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/calificaciones" element={<Calificaciones />} />
             <Route path="/kardex" element={<Kardex />} />
+            <Route path="/horario" element={<Horario />} />
           </Route>
         </Routes>
       </BrowserRouter>
