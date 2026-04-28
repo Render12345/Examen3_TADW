@@ -1,9 +1,26 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 function Navbar(params) {
   const { logout } = useAuth();
   const navigate = useNavigate();
+
+  // 1. Inicializamos el estado leyendo el localStorage, si no hay nada, usamos "default"
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "default",
+  );
+
+  // 2. Cada vez que cambie el estado "theme", actualizamos el HTML y el localStorage
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // 3. Manejador para el cambio de tema
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value);
+  };
 
   const handleLogout = () => {
     logout();
@@ -59,9 +76,6 @@ function Navbar(params) {
             {/* Menú en Desktop (oculto en móvil) */}
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal p-0">
-                {" "}
-                {/* Añadimos p-0 para alinear perfectamente */}
-                {/* 1. Items estáticos */}
                 {items.map((item, index) => (
                   <li key={index}>
                     <a className="hover:bg-base-300 text-lg" href={item.route}>
@@ -100,6 +114,7 @@ function Navbar(params) {
                 tabIndex="-1"
                 className="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl"
               >
+                {/* 4. Añadimos checked y onChange a cada input */}
                 <li>
                   <input
                     type="radio"
@@ -107,6 +122,8 @@ function Navbar(params) {
                     className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
                     aria-label="Default"
                     value="default"
+                    checked={theme === "default"}
+                    onChange={handleThemeChange}
                   />
                 </li>
                 <li>
@@ -116,6 +133,8 @@ function Navbar(params) {
                     className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
                     aria-label="Lemonade"
                     value="lemonade"
+                    checked={theme === "lemonade"}
+                    onChange={handleThemeChange}
                   />
                 </li>
                 <li>
@@ -125,6 +144,8 @@ function Navbar(params) {
                     className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
                     aria-label="Synthwave"
                     value="synthwave"
+                    checked={theme === "synthwave"}
+                    onChange={handleThemeChange}
                   />
                 </li>
                 <li>
@@ -134,6 +155,8 @@ function Navbar(params) {
                     className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
                     aria-label="Retro"
                     value="retro"
+                    checked={theme === "retro"}
+                    onChange={handleThemeChange}
                   />
                 </li>
                 <li>
@@ -143,6 +166,19 @@ function Navbar(params) {
                     className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
                     aria-label="Cyberpunk"
                     value="cyberpunk"
+                    checked={theme === "cyberpunk"}
+                    onChange={handleThemeChange}
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Dracula"
+                    value="dracula"
+                    checked={theme === "dracula"}
+                    onChange={handleThemeChange}
                   />
                 </li>
               </ul>
@@ -151,7 +187,7 @@ function Navbar(params) {
         </div>
       </div>
 
-      {/* 2. SIDEBAR: Extraído del navbar para que funcione correctamente el overlay */}
+      {/* 2. SIDEBAR */}
       <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer-2"
@@ -159,13 +195,6 @@ function Navbar(params) {
           className="drawer-overlay"
         ></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
-          {/* {items.map((item, index) => (
-            <li key={index}>
-              <a className="text-lg">{item.name}</a>
-            </li>
-          ))} */}{" "}
-          {/* Añadimos p-0 para alinear perfectamente */}
-          {/* 1. Items estáticos */}
           {items.map((item, index) => (
             <li key={index}>
               <a className="hover:bg-base-300 text-lg" href={item.route}>

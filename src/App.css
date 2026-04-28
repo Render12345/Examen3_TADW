@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   themes:
-    lemonade --default,
-    forest --prefersdark,
+    forest --default,
+    lemonade,
     synthwave,
     retro,
+    dracula,
     cyberpunk;
 }

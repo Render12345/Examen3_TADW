@@ -164,7 +164,9 @@ function Horario(params) {
   return (
     <Layout>
       <div className="text-center p-4">
-        <h1 className="text-2xl text-center mt-8">{horario?.message}</h1>
+        <h1 className="text-2xl text-center text-accent mt-8 font-bold">
+          Horario del alumno
+        </h1>
 
         {/* bento */}
         <div className=" w-full">
@@ -340,13 +342,13 @@ function Horario(params) {
                     </div>
 
                     <div className="stat">
-                      <div className="stat-title text-neutral-content">
+                      <div className="stat-title text-accent">
                         Cantidad de materias
                       </div>
-                      <div className="stat-value text-neutral-content">
+                      <div className="stat-value text-accent">
                         {materias.length}
                       </div>
-                      <div className="stat-desc text-neutral-content">
+                      <div className="stat-desc text-accent">
                         {materias.length} materias programadas
                       </div>
                     </div>

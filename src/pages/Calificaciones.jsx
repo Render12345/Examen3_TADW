@@ -1,5 +1,5 @@
 // src/pages/Calificaciones.jsx
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import Layout from "../components/Layout";
 import { useCalificaciones } from "../hooks/useCalificaciones";
 import {
@@ -8,10 +8,13 @@ import {
   calcularPromedio,
   calcularKpis,
 } from "../utils/calificacionesUtils";
+import Modal from "../components/Modal";
 
 function Calificaciones() {
+  const modalRef = useRef();
   const { calificaciones, loading, error } = useCalificaciones();
   const [busqueda, setBusqueda] = useState("");
+  const [materiaSeleccionada, setMateriaSeleccionada] = useState("");
 
   const periodoInfo = calificaciones?.data?.[0]?.periodo;
   const materias = calificaciones?.data?.[0]?.materias || [];
@@ -19,7 +22,7 @@ function Calificaciones() {
   const materiasFiltradas = useMemo(() => {
     if (!busqueda.trim()) return materias;
     return materias.filter((m) =>
-      m.materia.nombre_materia.toLowerCase().includes(busqueda.toLowerCase())
+      m.materia.nombre_materia.toLowerCase().includes(busqueda.toLowerCase()),
     );
   }, [materias, busqueda]);
 
@@ -38,7 +41,10 @@ function Calificaciones() {
             </div>
             <div className="skeleton h-10 w-full mb-4 rounded-xl"></div>
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="skeleton h-16 w-full rounded-xl mb-3"></div>
+              <div
+                key={i}
+                className="skeleton h-16 w-full rounded-xl mb-3"
+              ></div>
             ))}
           </div>
         </div>
@@ -147,29 +153,38 @@ function Calificaciones() {
                       const promedio = calcularPromedio(calificaiones);
                       const estado = getEstado(promedio);
                       return (
-                        <tr key={materia.id_grupo} className="hover:bg-black/10">
-                          <td className="text-left font-medium whitespace-normal min-w-[180px]">
+                        <tr
+                          key={materia.id_grupo}
+                          className="hover:bg-black/10"
+                        >
+                          <td className="text-left text-neutral-content font-medium whitespace-normal min-w-[180px]">
                             {materia.nombre_materia}
                           </td>
                           <td>
-                            <span className="badge badge-outline badge-sm">
+                            <span className="badge badge-outline text-neutral-content badge-sm">
                               {materia.clave_materia}
                             </span>
                           </td>
                           {calificaiones.map((c) => (
                             <td key={c.id_calificacion}>
                               {c.calificacion !== null ? (
-                                <span className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}>
+                                <span
+                                  className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}
+                                >
                                   {c.calificacion}
                                 </span>
                               ) : (
-                                <span className="text-neutral-content/30">—</span>
+                                <span className="text-neutral-content/30">
+                                  —
+                                </span>
                               )}
                             </td>
                           ))}
                           <td className="font-bold">
                             {promedio !== null ? (
-                              <span className={`badge ${getBadgeColor(promedio)}`}>
+                              <span
+                                className={`badge ${getBadgeColor(promedio)}`}
+                              >
                                 {promedio}
                               </span>
                             ) : (
@@ -182,7 +197,13 @@ function Calificaciones() {
                             </span>
                           </td>
                           <td>
-                            <button className="btn btn-sm btn-outline btn-info">
+                            <button
+                              className="btn btn-sm btn-outline btn-info"
+                              onClick={() => {
+                                setMateriaSeleccionada(materia.nombre_materia);
+                                modalRef.current.open();
+                              }}
+                            >
                               💬 Chat
                             </button>
                           </td>
@@ -199,7 +220,8 @@ function Calificaciones() {
 
         <div className="flex flex-wrap gap-3 justify-end text-sm text-base-content/60">
           <span className="flex items-center gap-1">
-            <span className="badge badge-success badge-sm">90-100</span> Excelente
+            <span className="badge badge-success badge-sm">90-100</span>{" "}
+            Excelente
           </span>
           <span className="flex items-center gap-1">
             <span className="badge badge-warning badge-sm">70-89</span> Aprobado
@@ -212,6 +234,7 @@ function Calificaciones() {
           </span>
         </div>
       </div>
+      <Modal ref={modalRef} materia={materiaSeleccionada} />
     </Layout>
   );
 }

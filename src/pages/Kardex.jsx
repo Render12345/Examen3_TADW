@@ -73,8 +73,8 @@ function Kardex(params) {
   return (
     <Layout>
       <div className="text-center p-4">
-        <h1 className="text-2xl text-center mt-8 font-bold text-neutral-content">
-          {kardex?.message || "Kardex del Alumno"}
+        <h1 className="text-2xl text-center mt-8 font-bold text-accent">
+          Kardex del Alumno
         </h1>
 
         <div className="w-full">
