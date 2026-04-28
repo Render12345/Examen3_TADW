@@ -1,43 +1,52 @@
 function Footer(params) {
   return (
-    <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10 w-full">
-      <aside>
-        <svg
-          width="50"
-          height="50"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          className="fill-current"
-        >
-          <path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
-        </svg>
-        <p>
-          ACME Industries Ltd.
-          <br />
-          Providing reliable tech since 1992
-        </p>
+    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
+      <aside className="grid-flow-col items-center">
+        <img
+          src="https://i0.wp.com/celaya.tecnm.mx/wp-content/uploads/2021/06/4104919116121984975228916236logo-tecno-nuevo-R-04.png?w=956&ssl=1"
+          alt="logo"
+          className="w-20"
+        />
+        <p>Instituto Tecnológico de Celaya - La técnica por un México mejor</p>
       </aside>
-      <nav>
-        <h6 className="footer-title">Services</h6>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Legal</h6>
-        <a className="link link-hover">Terms of use</a>
-        <a className="link link-hover">Privacy policy</a>
-        <a className="link link-hover">Cookie policy</a>
+      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <a>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            // viewBox="0 0 16 16"
+            id="Tiktok-Logo--Streamline-Phosphor"
+            viewBox="0 0 24 24"
+            className="fill-current w-9"
+          >
+            <desc>Tiktok Logo Streamline Icon: https://streamlinehq.com</desc>
+            <path
+              d="M14.9688875 4.2251875c-1.923575 -0.002 -3.48244375 -1.56086875 -3.48444375 -3.48444375 0 -0.3207375 -0.26000625 -0.58074375 -0.5807375 -0.58074375H8c-0.32073125 0 -0.5807375 0.26000625 -0.5807375 0.58074375v9.58221875c-0.0005125 1.1176375 -1.2107125 1.81560625 -2.17835625 1.25634375 -0.96764375 -0.5592625 -0.96700625 -1.95630625 0.00115 -2.51468125 0.033675 -0.01941875 0.0681125 -0.03748125 0.10323125 -0.0541375 0.202675 -0.09618125 0.331825 -0.3005 0.33175 -0.52484375V5.38666875c0.00015625 -0.3615 -0.32645 -0.63529375 -0.68236875 -0.57203125 -2.59083125 0.4616875 -4.5443 2.82965625 -4.5443 5.508325 0 4.24701875 4.59753125 6.90140625 8.27555625 4.77789375 1.70698125 -0.985525 2.75851875 -2.80684375 2.75851875 -4.77789375V7.4403125c1.07556875 0.56116875 2.2712875 0.852875 3.48444375 0.85005625 0.3207375 0 0.58074375 -0.26000625 0.58074375 -0.5807375V4.805925c0 -0.320725 -0.26001875 -0.580725 -0.58074375 -0.5807375Zm-0.5807375 2.87756875c-1.1348875 -0.10056875 -2.2215875 -0.5056 -3.1454375 -1.17236875 -0.36298125 -0.26096875 -0.87235 -0.03114375 -0.9168625 0.41369375 -0.0019625 0.0195625 -0.002925 0.03921875 -0.0028875 0.05888125v3.92c0 3.35290625 -3.62963125 5.448475 -6.53333125 3.772025 -1.3476125 -0.77805 -2.17778125 -2.2159375 -2.17778125 -3.772025 0 -1.88015 1.20794375 -3.566475 2.90370625 -4.18133125v2.0086375c-1.672725 1.11763125 -1.5083 3.62693125 0.2959625 4.5167375 1.736825 0.85654375 3.7694 -0.4074875 3.769225 -2.34404375V1.32148125h1.77851875c0.2686125 2.103825 1.9250625 3.76026875 4.0288875 4.0288875Z"
+              // stroke-width="0.0625"
+            ></path>
+          </svg>
+        </a>
+        <a>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            className="fill-current"
+          >
+            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+          </svg>
+        </a>
+        <a>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            className="fill-current"
+          >
+            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+          </svg>
+        </a>
       </nav>
     </footer>
   );

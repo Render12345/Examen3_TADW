@@ -66,7 +66,7 @@ function Calificaciones() {
     <Layout>
       <div className="p-4 space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-content mt-4">
+          <h1 className="text-2xl font-bold text-accent mt-4">
             Calificaciones
           </h1>
           {periodoInfo && (
