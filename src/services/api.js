@@ -16,3 +16,19 @@ export const loginApi = async (email, password) => {
   
   return data;
 };
+
+export const getStudentData = async () => {
+  const token = localStorage.getItem('token');
+  
+  const response = await fetch(`${BASE_URL}/movil/estudiante`, {
+    method: 'GET', // Generalmente los GET piden la info
+    headers: {
+      'Authorization': `Bearer ${token}`, // Muy importante para rutas protegidas
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if (!response.ok) throw new Error('Error al obtener datos del estudiante');
+  
+  return await response.json();
+};
