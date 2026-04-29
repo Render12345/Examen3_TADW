@@ -70,7 +70,7 @@ Sigue estos pasos para configurar el proyecto localmente:
    ```
    Si usas yarn:
    ```bash
-   npm install
+   yarn install
    ```
 
 ## 🚀 Ejecución del Proyecto
@@ -85,7 +85,7 @@ npm run dev
 Si usas yarn:
 
 ```
-npm run dev
+yarn run dev
 ```
 
 El servidor se ejecutará normalmente en http://localhost:5173. Abre esa dirección en tu navegador para ver la aplicación.
