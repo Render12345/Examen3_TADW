@@ -1,5 +1,5 @@
 // src/services/chatService.js
-const BASE_URL = `${import.meta.env.VITE_CHAT}/chat-server/movil/estudiante`;
+const BASE_URL = `${import.meta.env.VITE_CHAT}/api/movil/estudiante`;
 
 // Helper para obtener los headers con el token
 const getHeaders = () => {
