@@ -165,21 +165,28 @@ function Calificaciones() {
                               {materia.clave_materia}
                             </span>
                           </td>
-                          {calificaiones.map((c) => (
-                            <td key={c.id_calificacion}>
-                              {c.calificacion !== null ? (
-                                <span
-                                  className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}
-                                >
-                                  {c.calificacion}
-                                </span>
-                              ) : (
-                                <span className="text-neutral-content/30">
-                                  —
-                                </span>
-                              )}
-                            </td>
-                          ))}
+
+                          {/* Reemplaza el calificaiones.map por esto: */}
+                          {[0, 1, 2, 3].map((index) => {
+                            // Buscamos si existe una calificación en esa posición
+                            const c = calificaiones[index];
+
+                            return (
+                              <td key={index}>
+                                {c && c.calificacion !== null ? (
+                                  <span
+                                    className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}
+                                  >
+                                    {c.calificacion}
+                                  </span>
+                                ) : (
+                                  <span className="text-neutral-content/30">
+                                    —
+                                  </span>
+                                )}
+                              </td>
+                            );
+                          })}
                           <td className="font-bold">
                             {promedio !== null ? (
                               <span
