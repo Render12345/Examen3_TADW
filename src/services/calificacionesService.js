@@ -1,5 +1,5 @@
 // src/services/calificacionesService.js
-const BASE_URL = "/api/movil/estudiante";
+const BASE_URL = `${import.meta.env.VITE_URL}/api/movil/estudiante`;
 
 export const getCalificacionesApi = async () => {
   const token = localStorage.getItem("token");

@@ -2,7 +2,7 @@
 
 // Nota: Podrías llevar este BASE_URL a un archivo de configuración global
 // para no repetirlo en cada archivo de servicio.
-const BASE_URL = "/api/movil/estudiante";
+const BASE_URL = `${import.meta.env.VITE_URL}/api/movil/estudiante`;
 
 export const getKardexApi = async () => {
   // 1. Obtenemos el token

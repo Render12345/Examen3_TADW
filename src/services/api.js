@@ -1,5 +1,5 @@
 // src/services/api.js
-const BASE_URL = '/api';
+const BASE_URL = `${import.meta.env.VITE_URL}/api`;
 
 export const loginApi = async (email, password) => {
   const response = await fetch(`${BASE_URL}/login`, {
