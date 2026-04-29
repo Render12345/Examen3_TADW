@@ -6,29 +6,29 @@ información académica de manera dinámica y estructurada.
 ## Galeria
 
 Login
-![Login](src\assets\readme\login.png)
+![Login](src/assets/readme/login.png)
 
 Home
-![Home](src\assets\readme\home.png)
-![Home](src\assets\readme\home_mobile.png)
+![Home](src/assets/readme/home.png)
+![Home](src/assets/readme/home_mobile.png)
 
 Calificaciones
-![Calificaciones](src\assets\readme\cal1.png)
-![Calificaciones](src\assets\readme\cal2.png)
+![Calificaciones](src/assets/readme/cal1.png)
+![Calificaciones](src/assets/readme/cal2.png)
 
 Chat (distintos temas)
-![Chat](src\assets\readme\ch1.png)
-![Chat](src\assets\readme\ch2.png)
-![Chat](src\assets\readme\ch3.png)
+![Chat](src/assets/readme/ch1.png)
+![Chat](src/assets/readme/ch2.png)
+![Chat](src/assets/readme/ch3.png)
 
 Kardex
-![Kardex](src\assets\readme\kardex1.png)
-![Kardex](src\assets\readme\kardex2.png)
+![Kardex](src/assets/readme/kardex1.png)
+![Kardex](src/assets/readme/kardex2.png)
 
 Horario
-![Horario](src\assets\readme\horario_skeleton.png)
-![Horario](src\assets\readme\horario1.png)
-![Horario](src\assets\readme\horario2.png)
+![Horario](src/assets/readme/horario_skeleton.png)
+![Horario](src/assets/readme/horario1.png)
+![Horario](src/assets/readme/horario2.png)
 
 ## 🚀 Sobre el Framework y Herramientas
 
