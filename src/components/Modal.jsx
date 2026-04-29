@@ -1,80 +1,105 @@
+// src/components/Modal.jsx
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { useChat } from "../hooks/useChat";
 
-const Modal = forwardRef(({ materia }, ref) => {
+const Modal = forwardRef(({ materiaSeleccionada }, ref) => {
   const dialogRef = useRef(null);
-
-  // Estado para el input del nuevo mensaje
+  const scrollRef = useRef(null);
   const [nuevoMensaje, setNuevoMensaje] = useState("");
 
-  const mensajes = [
-    {
-      id: 1,
-      sender_type: "Alumno",
-      texto: "Hola",
-      hora: "09:00 AM",
-      posicion: "chat-end",
-      color: "chat-bubble-primary",
-    },
-    {
-      id: 2,
-      sender_type: "Maestro",
-      texto: "Hola, ¿qué necesitas?",
-      hora: "10:00 AM",
-      posicion: "chat-start",
-      color: "",
-    },
-    {
-      id: 3,
-      sender_type: "Alumno",
-      texto:
-        "Tenia duda de las calificaciones del segundo parcial, ¿ya las subió?",
-      hora: "11:30 AM",
-      posicion: "chat-end",
-      color: "chat-bubble-primary",
-    },
-  ];
+  const {
+    mensajes,
+    loading,
+    error,
+    cargarConversacion,
+    enviarMensaje,
+    setMensajes,
+  } = useChat();
 
   useImperativeHandle(ref, () => ({
-    open: () => dialogRef.current.showModal(),
-    close: () => dialogRef.current.close(),
+    open: () => {
+      dialogRef.current.showModal();
+      if (materiaSeleccionada?.maestroId) {
+        cargarConversacion(materiaSeleccionada.maestroId);
+      }
+    },
+    close: () => {
+      dialogRef.current.close();
+      setMensajes([]); // Limpia los mensajes al cerrar
+    },
   }));
 
-  const handleEnviar = (e) => {
+  const handleEnviar = async (e) => {
     e.preventDefault();
     if (!nuevoMensaje.trim()) return;
 
-    // TODO: Lógica para enviar el mensaje (ej. llamar a una API o actualizar el estado de mensajes)
-    console.log("Mensaje a enviar:", nuevoMensaje);
+    const textoAEnviar = nuevoMensaje;
+    setNuevoMensaje(""); // Limpiar input rápidamente
 
-    // Limpiamos el input después de "enviar"
-    setNuevoMensaje("");
+    await enviarMensaje(textoAEnviar);
+
+    // Auto-scroll al fondo al enviar mensaje
+    setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
+    }, 100);
   };
 
   return (
     <dialog ref={dialogRef} className="modal">
       <div className="modal-box flex flex-col h-[70vh] max-h-[500px] p-0 overflow-hidden">
-        {/* Header fijo con botón de cerrar integrado */}
         <div className="p-4 bg-base-200 border-b border-base-300 flex justify-between items-center z-10">
-          <h3 className="font-bold text-lg">Chat: {materia}</h3>
+          <h3 className="font-bold text-lg">
+            Chat: {materiaSeleccionada?.nombre}
+          </h3>
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-error">✕</button>
           </form>
         </div>
 
-        {/* Cuerpo SCROLLABLE */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-base-100">
-          {mensajes.map((msg) => (
-            <div key={msg.id} className={`chat ${msg.posicion}`}>
-              <div className="chat-header opacity-70 mb-1">
-                {msg.sender_type}
-                <time className="text-xs ml-2">{msg.hora}</time>
-              </div>
-              <div className={`chat-bubble ${msg.color}`}>{msg.texto}</div>
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-auto p-4 space-y-4 bg-base-100"
+        >
+          {loading && (
+            <div className="text-center py-4 text-base-content/60">
+              <span className="loading loading-spinner loading-md"></span>
+              <p>Cargando mensajes...</p>
             </div>
-          ))}
+          )}
+
+          {error && <div className="text-center py-4 text-error">{error}</div>}
+
+          {!loading && mensajes.length === 0 && !error && (
+            <div className="text-center py-4 text-base-content/50">
+              Aún no hay mensajes. ¡Envía el primero!
+            </div>
+          )}
+
+          {!loading &&
+            mensajes.map((msg) => {
+              // Asumiendo que tu backend responde "estudiante"
+              const isEstudiante = msg.sender_type === "estudiante";
+              return (
+                <div
+                  key={msg.id}
+                  className={`chat ${isEstudiante ? "chat-end" : "chat-start"}`}
+                >
+                  <div className="chat-header opacity-70 mb-1">
+                    {msg.sender_type}
+                    <time className="text-xs ml-2">{msg.hora}</time>
+                  </div>
+                  <div
+                    className={`chat-bubble ${isEstudiante ? "chat-bubble-primary" : ""}`}
+                  >
+                    {msg.texto}
+                  </div>
+                </div>
+              );
+            })}
         </div>
 
-        {/* Footer fijo con Input de texto */}
         <div className="p-3 border-t border-base-300 bg-base-200">
           <form onSubmit={handleEnviar} className="flex gap-2">
             <input
@@ -83,15 +108,19 @@ const Modal = forwardRef(({ materia }, ref) => {
               className="input input-bordered input-sm flex-1"
               value={nuevoMensaje}
               onChange={(e) => setNuevoMensaje(e.target.value)}
+              disabled={loading}
             />
-            <button type="submit" className="btn btn-primary btn-sm">
+            <button
+              type="submit"
+              className="btn btn-primary btn-sm"
+              disabled={loading || !nuevoMensaje.trim()}
+            >
               Enviar
             </button>
           </form>
         </div>
       </div>
 
-      {/* Cerrar al hacer clic fuera del modal */}
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>

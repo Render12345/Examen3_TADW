@@ -11,8 +11,17 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss()],
     server: {
       proxy: {
+        "/chat-server": {
+          target: env.VITE_CHAT,
+          changeOrigin: true,
+          secure: false,
+          // Si el servidor de chat espera recibir "/api/...",
+          // reescribimos "/chat-server" por "/api"
+          rewrite: (path) => path.replace(/^\/chat-server/, "/api"),
+        },
+        // 2. Regla general para el resto de la API
         "/api": {
-          target: env.VITE_URL, // <-- Ahora sí funcionará
+          target: env.VITE_URL,
           changeOrigin: true,
           secure: false,
         },

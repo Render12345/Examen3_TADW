@@ -14,7 +14,12 @@ function Calificaciones() {
   const modalRef = useRef();
   const { calificaciones, loading, error } = useCalificaciones();
   const [busqueda, setBusqueda] = useState("");
-  const [materiaSeleccionada, setMateriaSeleccionada] = useState("");
+
+  // Antes: const [materiaSeleccionada, setMateriaSeleccionada] = useState("");
+  const [materiaSeleccionada, setMateriaSeleccionada] = useState({
+    nombre: "",
+    maestroId: null,
+  });
 
   const periodoInfo = calificaciones?.data?.[0]?.periodo;
   const materias = calificaciones?.data?.[0]?.materias || [];
@@ -149,74 +154,83 @@ function Calificaciones() {
                     </tr>
                   </thead>
                   <tbody>
-                    {materiasFiltradas.map(({ materia, calificaiones }) => {
-                      const promedio = calcularPromedio(calificaiones);
-                      const estado = getEstado(promedio);
-                      return (
-                        <tr
-                          key={materia.id_grupo}
-                          className="hover:bg-black/10"
-                        >
-                          <td className="text-left text-neutral-content font-medium whitespace-normal min-w-[180px]">
-                            {materia.nombre_materia}
-                          </td>
-                          <td>
-                            <span className="badge badge-outline text-neutral-content badge-sm">
-                              {materia.clave_materia}
-                            </span>
-                          </td>
-
-                          {/* Reemplaza el calificaiones.map por esto: */}
-                          {[0, 1, 2, 3].map((index) => {
-                            // Buscamos si existe una calificación en esa posición
-                            const c = calificaiones[index];
-
-                            return (
-                              <td key={index}>
-                                {c && c.calificacion !== null ? (
-                                  <span
-                                    className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}
-                                  >
-                                    {c.calificacion}
-                                  </span>
-                                ) : (
-                                  <span className="text-neutral-content/30">
-                                    —
-                                  </span>
-                                )}
-                              </td>
-                            );
-                          })}
-                          <td className="font-bold">
-                            {promedio !== null ? (
-                              <span
-                                className={`badge ${getBadgeColor(promedio)}`}
-                              >
-                                {promedio}
+                    {materiasFiltradas.map(
+                      ({ materia, calificaiones }, index) => {
+                        const promedio = calcularPromedio(calificaiones);
+                        const estado = getEstado(promedio);
+                        return (
+                          <tr
+                            key={materia.id_grupo}
+                            className="hover:bg-black/10"
+                          >
+                            <td className="text-left text-neutral-content font-medium whitespace-normal min-w-[180px]">
+                              {materia.nombre_materia}
+                            </td>
+                            <td>
+                              <span className="badge badge-outline text-neutral-content badge-sm">
+                                {materia.clave_materia}
                               </span>
-                            ) : (
-                              <span className="text-neutral-content/30">—</span>
-                            )}
-                          </td>
-                          <td>
-                            <span className={`badge badge-sm ${estado.color}`}>
-                              {estado.label}
-                            </span>
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-sm btn-outline btn-info"
-                              onClick={() => {
-                                setMateriaSeleccionada(materia.nombre_materia);
-                                modalRef.current.open();
-                              }}
-                            >
-                              💬 Chat
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                            </td>
+
+                            {/* Reemplaza el calificaiones.map por esto: */}
+                            {[0, 1, 2, 3].map((index) => {
+                              // Buscamos si existe una calificación en esa posición
+                              const c = calificaiones[index];
+
+                              return (
+                                <td key={index}>
+                                  {c && c.calificacion !== null ? (
+                                    <span
+                                      className={`badge badge-sm ${getBadgeColor(c.calificacion)}`}
+                                    >
+                                      {c.calificacion}
+                                    </span>
+                                  ) : (
+                                    <span className="text-neutral-content/30">
+                                      —
+                                    </span>
+                                  )}
+                                </td>
+                              );
+                            })}
+                            <td className="font-bold">
+                              {promedio !== null ? (
+                                <span
+                                  className={`badge ${getBadgeColor(promedio)}`}
+                                >
+                                  {promedio}
+                                </span>
+                              ) : (
+                                <span className="text-neutral-content/30">
+                                  —
+                                </span>
+                              )}
+                            </td>
+                            <td>
+                              <span
+                                className={`badge badge-sm ${estado.color}`}
+                              >
+                                {estado.label}
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-sm btn-outline btn-info"
+                                onClick={() => {
+                                  setMateriaSeleccionada({
+                                    nombre: materia.nombre_materia,
+                                    maestroId: index + 1,
+                                  });
+                                  modalRef.current.open();
+                                }}
+                              >
+                                💬 Chat
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      },
+                    )}
                   </tbody>
                 </table>
               )}
@@ -241,7 +255,7 @@ function Calificaciones() {
           </span>
         </div>
       </div>
-      <Modal ref={modalRef} materia={materiaSeleccionada} />
+      <Modal ref={modalRef} materiaSeleccionada={materiaSeleccionada} />
     </Layout>
   );
 }
